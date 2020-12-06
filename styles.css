@@ -211,7 +211,7 @@ a
     justify-content: flex-start;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
     .desc_profile
     {
         text-align: center;
@@ -221,6 +221,8 @@ a
     }
     
 }
+
+
 
 .linkedin_button
 {
@@ -255,6 +257,7 @@ a
     flex-wrap: wrap;
     align-items: flex-start;
     padding: 8px;
+    margin-bottom: 10px;
 
 }
 
@@ -269,6 +272,8 @@ a
     flex-wrap: wrap;
     align-items: center;
     padding: 8px;
+    margin-bottom: 10px;
+
 }
 
 
@@ -282,6 +287,8 @@ a
     flex-wrap: wrap;
     align-items: center;
     padding: 8px;
+    margin-bottom: 10px;
+
 }
 
 #original
@@ -301,6 +308,8 @@ a
     flex-wrap: wrap;
     align-items: center;
     padding: 8px;
+    margin-bottom: 10px;
+
 }
 
 .what_element
@@ -310,6 +319,7 @@ a
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 
@@ -317,11 +327,23 @@ a
 {
     padding-left: 15px;
     padding-right: 15px;
+
 }
 
 .what_element h4
 {
     margin-top: 8px;
+    
+}
+
+#what_title
+{
+    margin-bottom: 75px;
+}
+
+#how_title
+{
+    margin-bottom: 53px;
 }
 
 /* 3ND PAGE */
@@ -452,9 +474,11 @@ a
 {
     text-align: center;
     margin-top: 75px;
-    margin-bottom: 20px;
-    
+    margin-bottom: 20px; 
+    margin-left: 25px !important;
+    margin-right: 25px !important;
 }
+
 .project_box p
 {   
     width: 350px;
