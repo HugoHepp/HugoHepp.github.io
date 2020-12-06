@@ -41,7 +41,7 @@ border: 3px solid black;
 @media screen and (max-width: 700px) {
     #cursor_custom
     {
-        display: none;
+        display: hidden;
     }
 }
 
@@ -282,6 +282,12 @@ a
     flex-wrap: wrap;
     align-items: center;
     padding: 8px;
+}
+
+#original
+{
+    height: 100px !important;
+    width: 100px !important;
 }
 
 
@@ -590,4 +596,5 @@ a
         padding-bottom: 250px;
     }
 }
+
 
