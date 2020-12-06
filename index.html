@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Hugo Hepp</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="scriptmin.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">  
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    
+
+    </head>
+    <body>
+        <div id="cursor_custom"></div>
+        <nav class="navbar navbar-expand-lg fixed-top">
+                <div class="navbar-nav">
+                    <a class="nav-link active" href="#section_home">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#section_about">About</a>
+                    <a class="nav-link" href="#section_projects">Projects</a>
+                    <a class="nav-link" href="#section_contact">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid"> 
+            <div id="section_home" class="section_color1">
+                <div class="row">
+                    <p class="col-12" id="introduction">Hi, I'm Hugo Hepp <br>Junior Web Developer</p>
+                </div>
+
+                <div class="row" style="margin-top: 40px;">
+                    <div class="col-12 d-flex justify-content-center">
+                        <a href='#section_about' id="lets_go">Let's go!</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="section_about" class="section_color2" style="padding-top:150px; padding-bottom: 150px;">
+                <div class="row">
+                    <div class="who col-12">
+                        <h3>Who ?</h3>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center" style="margin-top:70px">
+                    <div class="col-md-3 col-12 d-flex justify-content-center profil_picture_box">
+                        <div id=profil_picture style="margin-top: 10px;"></div>
+                    </div>
+                    <div class="col-md-3 col-12 desc_profile_box">
+                        <div class="desc_profile">
+                            <p>I’m a junior Web Developer, passionate by innovation and design. I build modern web application for desktop and mobile with Django and React. Feel free to send me a message. Let meet us and doing great things!</p>
+                            <a href='https://www.linkedin.com/in/hugo-hepp/' target="_blank" class="linkedin_button">
+                                <div style="padding-right: 10px;">LinkedIn</div>
+                                <img src="static/linkedin_logo.svg" style="height: 25px;">
+                            </a>
+                        </div>          
+                    </div>
+                </div>
+            </div>
+        
+
+            <div class="section_color3" style="padding-top:150px;padding-bottom: 150px;">
+
+                <div class="row d-flex justify-content-center">
+                    <div class="what col-lg-5 col-12">
+                        <h3>What ?</h3>
+                        <div class="row" style="margin-top:40px">
+                            <div class="col-md-2 col-0"></div>
+                            <div class="what_element col-md-4 col-6">
+                                <div class="what_element_box_dynamic">
+                                    <img id="dynamic" src="static/dynamic_ball.svg">
+                                </div>
+                                <h4>Dynamic</h4>
+                                <p>Make your website come to life with nice smooth animations.</p>
+                            </div>
+
+                            <div class="what_element col-md-4 col-6">
+                                <div class="what_element_box_convenient">
+                                    <img id="convenient" src="static/convenient_arrow.svg">
+                                </div>
+                                <h4>Convenient</h4>
+                                <p>Intuitive and easy to use website! Never lost. Always Win.</p>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:10px; margin-bottom:35px">
+                            <div class="col-md-2 col-0"></div>
+
+                            <div class="what_element col-md-4 col-6" style="margin-top:20px">
+                                <div class="what_element_box_responsive">
+                                    <img id="responsive" src="static/responsive_phone.svg">
+                                </div>
+                                <h4>Responsive</h4>
+                                <p>Desktop, laptop, tablet, phone? Your website will always looks good!</p>
+                            </div>
+
+                            <div class="what_element col-md-4 col-6" style="margin-top:20px">
+                                <div class="what_element_box_original">
+                                    
+                                        <img id="original" src="static/original.svg"/>
+                                            
+                                </div>
+                                <h4>Original</h4>
+                                <p>Make authentic designed website that looks like you!</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="how col-md-5 col-12">
+                        <h3>How ?</h3>
+                        <div class="skill_box" style="margin-top: 25px;">
+                            <div class="skill_bar">
+                                <div class="skill_desc">Html</div>
+                                <div class="skill_progress_html"></div>
+                            </div>
+                            <div class="skill_bar">
+                                <div class="skill_desc">CSS</div>
+                                <div class="skill_progress_css"></div>
+                            </div>
+                            <div class="skill_bar">
+                                <div class="skill_desc">JS</div>
+                                <div class="skill_progress_js"></div>
+                            </div>
+                            <div class="skill_bar">
+                                <div class="skill_desc">Python</div>
+                                <div class="skill_progress_python"></div>
+                            </div>
+                            <div class="skill_bar">
+                                <div class="skill_desc">React</div>
+                                <div class="skill_progress_react"></div>
+                            </div>
+                            <div class="skill_bar">
+                                <div class="skill_desc">Django</div>
+                                <div class="skill_progress_django"></div>
+                            </div>
+                            <div class="skill_bar">
+                                <div class="skill_desc">Bootstrap</div>
+                                <div class="skill_progress_bootstrap"></div>
+                            </div>
+                            <div class="skill_bar">
+                                <div class="skill_desc">SQL</div>
+                                <div class="skill_progress_sql"></div>
+                            </div>
+                            <div class="skill_bar">
+                                <div class="skill_desc">Figma</div>
+                                <div class="skill_progress_figma"></div>
+                            </div>
+                            <div class="skill_bar">
+                                <div class="skill_desc">Wordpress</div>
+                                <div class="skill_progress_wordpress"></div>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+            </div>
+
+                
+
+            <div id="section_projects" class="section_color4" style="padding-top: 150px;padding-bottom: 150px;">
+                
+                <div class="projects">
+
+                    <div class="row">
+                        <h3 class="col-12">Projects</h3>
+                    </div>
+                        
+                    <div class="row d-flex justify-content-center">
+
+                        <div id="project_aimtrainer" class="project_box col-12 col-xl-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 ">
+                                    <img id="img_aimtrainer" src="static/aimtrainer.svg" class="image_project">
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <p>AimTrainer is a webapplication that trains your aim and reflex for fps games on PC. Front-end with React, Back-end with Django.</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <a id="github_aimtrainer" target="_blank" href="https://github.com/HugoHepp/AimTrainer"  class="github_button">
+                                        <div style="padding-right: 10px;">Look code on Github</div>
+                                        <img src="static/Github_simple.svg" style="height: 25px;">
+                                    </a>
+                                </div>
+                            </div>   
+
+                        </div>
+
+            
+                        <div id="project_simplepost" class="project_box col-12 col-xl-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12">
+                                    <img id="img_simplepost" src="static/thesimplepost.svg" class="image_project">
+                                </div>
+                            </div>  
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <p>The Simple Post is social network web application like twitter. Built with Django, Javascript and SQL</p>
+                                </div>
+                            </div>    
+
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <a id="github_simplepost" target="_blank" href="https://github.com/HugoHepp/SimplePost"   class="github_button">
+                                        <div style="padding-right: 10px;">Look code on Github</div>
+                                        <img src="static/Github_simple.svg" style="height: 25px;">
+                                    </a>
+                                </div>
+                            </div>     
+                        </div>
+
+
+                        <div id="project_auction" class="project_box col-12 col-xl-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12">
+                                    <img id="img_auction" src="static/auctions.svg" class="image_project">
+                                </div>
+                            </div>   
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">      
+                                    <p>Auction is a web application to sell and buy items like Ebay. Built with Django, Javascript and SQL</p>
+                                </div>
+                            </div>  
+
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <a id="github_auction" target="_blank" href="https://github.com/HugoHepp/Auction"   class="github_button">
+                                        <div style="padding-right: 10px;">Look code on Github</div>
+                                        <img src="static/Github_simple.svg" style="height: 25px;">
+                                    </a>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row d-flex justify-content-center">
+                        
+                        <div id="project_sheltergallery" class="project_box col-12 col-xl-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">    
+                                    <img id="img_sheltergallery" src="static/sheltergallery.svg" class="image_project">
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">  
+                                    <p>Shelter Gallery is a web application that centralizes all pets from shelter by area. Built with Flask and SQL</p>  
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">  
+                                    <a id="github_sheltergallery" target="_blank" href="https://github.com/HugoHepp/ShelterGallery"  class="github_button">
+                                        <div style="padding-right: 10px;">Look code on Github</div>
+                                        <img src="static/Github_simple.svg" style="height: 25px;">
+                                    </a> 
+                                </div>  
+                            </div>
+                        </div>
+
+
+                        <div id="project_musiciantoolkit" class="project_box col-12 col-xl-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">    
+                                    <img id="img_musiciantoolkit" src="static/musician_toolkit.svg" class="image_project">
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">    
+                                    <p>Musician Toolkit is a website that helps musicians to compose by giving them tools about scales, chords and modes. Built with HTML, CSS and Javascript</p>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">    
+                                    <a id="github_musiciantoolkit" target="_blank" href="https://github.com/HugoHepp/MusicianToolkit"   class="github_button">
+                                        <div style="padding-right: 10px;">Look code on Github</div>
+                                        <img src="static/Github_simple.svg" style="height: 25px;">
+                                    </a> 
+                               </div>
+                            </div>
+                        </div>
+
+
+                        <div id="project_mail" class="project_box col-12 col-xl-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">    
+                                    <img id="img_mail" src="static/mail.svg" class="image_project">
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">    
+                                    <p>Mail is a web application for email services who works like Gmail, built with Django, Javascript and SQL</p>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">    
+                                    <a id="github_mail" target="_blank" href="https://github.com/HugoHepp/Mail"   class="github_button">
+                                        <div style="padding-right: 10px;">Look code on Github</div>
+                                        <img src="static/Github_simple.svg" style="height: 25px;">
+                                    </a>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row d-flex justify-content-center">
+
+                        <div id="project_wiki" class="project_box col-12 col-xl-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">   
+                                    <img id="img_wiki" src="static/wiki_clone.svg" class="image_project">
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">   
+                                    <p>Wiki is a Wikipedia clone website that lets user create and edit pages with markdown. Build with Django and SQL</p>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">   
+                                    <a id="github_wiki" target="_blank" href="https://github.com/HugoHepp/Wiki"   class="github_button">
+                                        <div style="padding-right: 10px;">Look code on Github</div>
+                                        <img src="static/Github_simple.svg" style="height: 25px;">
+                                     </a>     
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="project_google" class="project_box col-8 col-lg-3 col-md-4">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">   
+                                    <img id="img_google" src="static/google_clone.svg" class="image_project">
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">   
+                                    <p>Search is a google clone website that uses google engine to query data. Build with HTML and CSS only</p>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center">   
+                                    <a id="github_google" target="_blank" href="https://github.com/HugoHepp/Google"   class="github_button">
+                                        <div style="padding-right: 10px;">Look code on Github</div>
+                                        <img src="static/Github_simple.svg" style="height: 25px;">
+                                    </a>   
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+                
+            <div id='section_contact' class="section_color5">    
+                <form action="mailto:hugo.hepp94@gmail.com" method="post" enctype="text/plain" onsubmit="location.href='index.html';">
+                    <div class="row d-flex justify-content-center">
+                        <div class="contact col-10 col-md-4 d-flex justify-content-center">
+                            <h2>Contact</h2>
+                            <input type="text" name="Sender" class="contact_email" placeholder="Email">
+                            <input type="text" name="Subject" class="contact_subject" placeholder="Subject">
+                            <textarea type="text" name="Message" class="contact_message" placeholder="Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-10 col-md-4 d-flex justify-content-center">
+                            <button type="submit" value="Send" id="contact_submit">Submit</button>
+                        </div>
+                    </div>
+                </form>       
+            </div>
+            <footer class="row">
+                <div id="footer" class="col-12">
+                    <p></p>Developed and designed by <span>Hugo Hepp </span> - 2020</p>
+                </div>        
+            </footer>    
+        </div>
+    </body>   
+</html>
