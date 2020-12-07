@@ -482,7 +482,7 @@ a
 .project_box p
 {   
     width: 350px;
-    height: 110px;
+    height: auto;
 }
 
 .image_project
@@ -492,6 +492,7 @@ a
     margin-bottom: 20px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+
 
 .github_button
 {
