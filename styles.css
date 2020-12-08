@@ -485,6 +485,33 @@ a
     height: 130px;
 }
 
+@media screen and (max-width: 2100px) {
+    .project_box p
+    {
+        height: 150px;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    .project_box p
+    {
+        height: 200px;
+    }
+}
+@media screen and (max-width: 1290px) {
+    .project_box p
+    {
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .project_box p
+    {
+        height: auto;
+    }
+}
+
 .image_project
 {
     height: 220px;
