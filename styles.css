@@ -409,6 +409,14 @@ a
     margin: 1px;
 }
 
+.skill_progress_php
+{
+    width: 0px;
+    height: 28px;
+    background: #ED7A27;
+    margin: 1px;
+}
+
 .skill_progress_react
 {
     width: 0px;
@@ -485,23 +493,23 @@ a
     height: 130px;
 }
 
-@media screen and (max-width: 2100px) {
+@media screen and (min-width: 1900px) {
     .project_box p
     {
-        height: 150px;
+        height: 100px;
     }
 }
 
 @media screen and (max-width: 1600px) {
     .project_box p
     {
-        height: 200px;
+        height: 160px;
     }
 }
 @media screen and (max-width: 1290px) {
     .project_box p
     {
-        height: 250px;
+        height: 165px;
     }
 }
 
