@@ -38,6 +38,18 @@ border: 3px solid black;
  
 }
 
+#loading{
+    background-color:  #1d1a1a;
+    height: 850px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loaded{
+    display: none;
+}
+
 @media screen and (max-width: 1200px) {
     #cursor_custom
     {
