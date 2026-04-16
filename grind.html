@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GRIND — Suivi Musculation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:#09090b; --surface:#111115; --surface2:#18181d; --surface3:#222229;
+  --border:#28282f; --border2:#3a3a44; --text:#f0f0f4; --muted:#5a5a68;
+  --camille:#1ecb7b; --camille-dim:rgba(30,203,123,0.1);
+  --vivien:#ff8533;  --vivien-dim:rgba(255,133,51,0.1);
+  --pc:var(--camille); --pc-dim:var(--camille-dim);
+  --font-d:'Bebas Neue',sans-serif; --font-m:'DM Mono',monospace;
+}
+body[data-participant="Camille"] { --pc:var(--camille); --pc-dim:var(--camille-dim); }
+body[data-participant="Vivien"]  { --pc:var(--vivien);  --pc-dim:var(--vivien-dim);  }
+
+.grain { position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px; }
+
+body { background:var(--bg); color:var(--text); font-family:var(--font-m); min-height:100vh; -webkit-font-smoothing:antialiased; }
+.app { position:relative; z-index:1; max-width:880px; margin:0 auto; padding:36px 20px 100px; }
+
+header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px; padding-bottom:22px; border-bottom:1px solid var(--border); }
+.logo { display:flex; flex-direction:column; gap:2px; }
+.logo-main { font-family:var(--font-d); font-size:4.5rem; line-height:1; letter-spacing:6px; color:var(--pc); transition:color 0.35s; }
+.logo-sub { font-size:0.6rem; letter-spacing:4px; text-transform:uppercase; color:var(--muted); }
+.date-badge { font-size:0.65rem; letter-spacing:3px; text-transform:uppercase; color:var(--muted); border:1px solid var(--border); padding:7px 14px; border-radius:4px; }
+
+.participant-tabs { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+.tab { background:var(--surface); border:1px solid var(--border); color:var(--muted); cursor:pointer; padding:18px 20px; border-radius:10px; display:flex; flex-direction:column; gap:5px; text-align:left; transition:all 0.22s; }
+.tab:hover { border-color:var(--border2); background:var(--surface2); }
+.tab-name { font-family:var(--font-d); font-size:2rem; letter-spacing:3px; line-height:1; transition:color 0.22s; }
+.tab-count { font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; }
+.tab.active[data-participant="Camille"] { border-color:var(--camille); background:var(--camille-dim); color:var(--text); }
+.tab.active[data-participant="Camille"] .tab-name { color:var(--camille); }
+.tab.active[data-participant="Vivien"]  { border-color:var(--vivien);  background:var(--vivien-dim);  color:var(--text); }
+.tab.active[data-participant="Vivien"]  .tab-name  { color:var(--vivien); }
+
+.session-bar { display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 14px; margin-bottom:24px; }
+#session-select { flex:1; background:transparent; border:none; color:var(--text); font-family:var(--font-m); font-size:0.82rem; cursor:pointer; outline:none; min-width:0; }
+#session-select option { background:var(--surface2); }
+.session-actions { display:flex; gap:6px; }
+.btn-icon { width:32px; height:32px; border-radius:6px; border:1px solid var(--border); background:var(--surface2); color:var(--text); font-size:0.95rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; padding:0; line-height:1; }
+.btn-icon:hover { background:var(--surface3); border-color:var(--border2); }
+.btn-icon.danger:hover { background:rgba(255,60,60,0.12); border-color:#ff5050; color:#ff5050; }
+
+.table-header { display:grid; grid-template-columns:130px 1fr; gap:8px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+.th-exercise { font-size:0.55rem; letter-spacing:4px; text-transform:uppercase; color:var(--muted); }
+.th-sets { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; text-align:center; }
+.th-sets span { font-size:0.55rem; letter-spacing:4px; text-transform:uppercase; color:var(--muted); }
+
+#workout-body { display:flex; flex-direction:column; }
+.exercise-row { display:grid; grid-template-columns:130px 1fr; gap:8px; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); }
+.exercise-row:last-child { border-bottom:none; }
+.exercise-name { font-family:var(--font-d); font-size:1.5rem; letter-spacing:2px; color:var(--text); line-height:1; padding-right:8px; }
+.sets-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+
+.set-cell { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 6px 8px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:border-color 0.2s; }
+.set-cell:focus-within { border-color:var(--pc); }
+.set-num { display:none; font-size:0.5rem; letter-spacing:3px; text-transform:uppercase; color:var(--muted); }
+
+.reps-stepper { display:flex; align-items:center; gap:3px; width:100%; justify-content:center; }
+.step-btn { width:26px; height:26px; border-radius:50%; background:var(--surface2); border:1px solid var(--border2); color:var(--muted); font-size:1.05rem; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; flex-shrink:0; transition:all 0.12s; font-family:var(--font-m); user-select:none; }
+.step-btn:hover { background:var(--pc); border-color:var(--pc); color:var(--bg); transform:scale(1.08); }
+.step-btn:active { transform:scale(0.9); }
+
+.reps-input { width:36px; background:transparent; border:none; color:var(--text); font-family:var(--font-d); font-size:1.6rem; text-align:center; padding:0; line-height:1; -moz-appearance:textfield; }
+.reps-input::-webkit-outer-spin-button, .reps-input::-webkit-inner-spin-button { -webkit-appearance:none; }
+.reps-input:focus { outline:none; color:var(--pc); }
+.reps-label { font-size:0.5rem; letter-spacing:3px; color:var(--muted); text-transform:uppercase; }
+
+.weight-row { display:flex; align-items:center; gap:3px; width:100%; justify-content:center; }
+.weight-input { width:44px; background:var(--surface2); border:1px solid var(--border); border-radius:5px; color:var(--text); font-family:var(--font-m); font-size:0.8rem; padding:5px 3px; text-align:center; transition:border-color 0.15s; -moz-appearance:textfield; }
+.weight-input::-webkit-outer-spin-button, .weight-input::-webkit-inner-spin-button { -webkit-appearance:none; }
+.weight-input:focus { outline:none; border-color:var(--pc); }
+.weight-unit { font-size:0.55rem; color:var(--muted); letter-spacing:1px; }
+
+#save-btn { display:block; width:100%; margin-top:32px; padding:20px; background:var(--pc); border:none; border-radius:10px; color:var(--bg); font-family:var(--font-d); font-size:1.5rem; letter-spacing:4px; cursor:pointer; transition:all 0.2s; }
+#save-btn:hover { filter:brightness(1.08); transform:translateY(-2px); box-shadow:0 12px 32px rgba(0,0,0,0.45); }
+#save-btn:active { transform:translateY(0); box-shadow:none; }
+
+.transfer-bar { display:flex; gap:10px; margin-top:12px; }
+.btn-transfer { flex:1; padding:12px; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--muted); font-family:var(--font-m); font-size:0.78rem; letter-spacing:1px; cursor:pointer; text-align:center; transition:all 0.15s; }
+.btn-transfer:hover { background:var(--surface2); border-color:var(--border2); color:var(--text); }
+
+.toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--surface2); border:1px solid var(--border2); color:var(--text); padding:13px 26px; border-radius:8px; font-family:var(--font-m); font-size:0.82rem; letter-spacing:1px; box-shadow:0 10px 40px rgba(0,0,0,0.55); transition:opacity 0.3s,transform 0.3s; z-index:999; white-space:nowrap; }
+.toast.hidden { opacity:0; pointer-events:none; transform:translateX(-50%) translateY(10px); }
+.toast.success { border-color:#3fb950; color:#3fb950; }
+.toast.error   { border-color:#ff5555; color:#ff5555; }
+
+@media (max-width:640px) {
+  .app { padding:14px 10px 80px; }
+  header { flex-direction:row; align-items:center; justify-content:space-between; margin-bottom:14px; padding-bottom:14px; }
+  .logo { flex-direction:row; align-items:baseline; gap:8px; }
+  .logo-main { font-size:2.6rem; letter-spacing:4px; }
+  .logo-sub { display:none; }
+  .date-badge { font-size:0.6rem; padding:5px 10px; letter-spacing:2px; }
+  .participant-tabs { gap:8px; margin-bottom:12px; }
+  .tab { padding:12px 14px; border-radius:8px; }
+  .tab-name { font-size:1.6rem; letter-spacing:2px; }
+  .tab-count { font-size:0.55rem; }
+  .session-bar { padding:8px 12px; margin-bottom:16px; }
+  #session-select { font-size:0.78rem; }
+  .table-header { display:none; }
+  .exercise-row { display:flex; flex-direction:column; gap:6px; padding:10px 0; border-bottom:1px solid var(--border); align-items:stretch; }
+  .exercise-name { font-size:1.15rem; letter-spacing:2px; padding-right:0; color:var(--muted); }
+  .sets-grid { grid-template-columns:repeat(4,1fr); gap:5px; }
+  .set-num { display:block; }
+  .set-cell { padding:7px 4px 6px; gap:5px; border-radius:7px; }
+  .reps-stepper { gap:2px; }
+  .step-btn { width:28px; height:28px; font-size:1rem; position:relative; }
+  .step-btn::before { content:''; position:absolute; inset:-8px; }
+  .reps-input { font-size:1.4rem; width:28px; }
+  .reps-label { display:none; }
+  .weight-input { width:38px; font-size:0.75rem; padding:4px 2px; }
+  .weight-unit { font-size:0.5rem; }
+  #save-btn { font-size:1.2rem; padding:16px; margin-top:20px; letter-spacing:3px; }
+  .toast { font-size:0.78rem; padding:10px 18px; bottom:16px; }
+}
+  </style>
+</head>
+<body data-participant="Camille">
+  <div class="grain"></div>
+  <div class="app">
+    <header>
+      <div class="logo">
+        <span class="logo-main">GRIND</span>
+        <span class="logo-sub">Suivi Musculation</span>
+      </div>
+      <div class="date-badge" id="session-date"></div>
+    </header>
+
+    <div class="participant-tabs">
+      <button class="tab active" data-participant="Camille">
+        <span class="tab-name">Camille</span>
+        <span class="tab-count" id="tab-count-Camille">0 session</span>
+      </button>
+      <button class="tab" data-participant="Vivien">
+        <span class="tab-name">Vivien</span>
+        <span class="tab-count" id="tab-count-Vivien">0 session</span>
+      </button>
+    </div>
+
+    <div class="session-bar">
+      <select id="session-select"></select>
+      <div class="session-actions">
+        <button class="btn-icon" id="new-session-btn" title="Nouvelle session">＋</button>
+        <button class="btn-icon" id="copy-last-btn" title="Copier session précédente">↑</button>
+        <button class="btn-icon danger" id="delete-session-btn" title="Supprimer">✕</button>
+      </div>
+    </div>
+
+    <div class="table-header">
+      <div class="th-exercise">Exercice</div>
+      <div class="th-sets"><span>S1</span><span>S2</span><span>S3</span><span>S4</span></div>
+    </div>
+
+    <div id="workout-body"></div>
+    <button id="save-btn">ENREGISTRER LA SESSION</button>
+
+    <div class="transfer-bar">
+      <button id="export-btn" class="btn-transfer">⬇ Exporter les données</button>
+      <label class="btn-transfer" id="import-label">⬆ Importer les données<input type="file" id="import-input" accept=".json" style="display:none"></label>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script>
+const EXERCISES = ["Presse", "Squats", "Fentes", "Adducteurs", "Abduction"];
+const SETS = 4;
+const PARTICIPANTS = ["Camille", "Vivien"];
+const STORAGE_KEY = "gym_tracker_v1";
+
+let state = (() => { try { const r = localStorage.getItem(STORAGE_KEY); return r ? JSON.parse(r) : def(); } catch { return def(); } })();
+let currentParticipant = PARTICIPANTS[0];
+let currentSessionId = null;
+
+function def() { const s = {}; PARTICIPANTS.forEach(p => s[p] = []); return s; }
+function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function dateLabel(iso) { const [y,m,d] = iso.split("-"); return d+"/"+m+"/"+y; }
+function todayISO() { return new Date().toISOString().slice(0,10); }
+function defaultReps(i) { return i < 3 ? "12" : "1-3"; }
+
+function emptySession() {
+  const sets = {};
+  EXERCISES.forEach(ex => { sets[ex] = Array.from({length:SETS},(_,i) => ({reps:defaultReps(i),weight:""})); });
+  return { id: Date.now(), date: todayISO(), sets };
+}
+function getSession(p, id) { return state[p].find(s => s.id === id) ?? null; }
+function getLastSession(p, excl) { const ss = state[p].filter(s => s.id !== excl); return ss.length ? ss[ss.length-1] : null; }
+
+function updateTabCounts() {
+  PARTICIPANTS.forEach(p => { const el = document.getElementById("tab-count-"+p); const n = state[p].length; if(el) el.textContent = n+" session"+(n!==1?"s":""); });
+}
+
+function renderSessionSelect() {
+  const sel = document.getElementById("session-select");
+  const ss = state[currentParticipant];
+  sel.innerHTML = "";
+  if (!ss.length) { sel.innerHTML='<option value="">Aucune session</option>'; return; }
+  ss.slice().reverse().forEach(s => {
+    const o = document.createElement("option");
+    o.value = s.id; o.textContent = "Session du "+dateLabel(s.date);
+    if (s.id === currentSessionId) o.selected = true;
+    sel.appendChild(o);
+  });
+}
+
+function renderTable() {
+  const session = getSession(currentParticipant, currentSessionId);
+  const body = document.getElementById("workout-body");
+  body.innerHTML = "";
+  EXERCISES.forEach(ex => {
+    const row = document.createElement("div"); row.className = "exercise-row";
+    const nm = document.createElement("div"); nm.className = "exercise-name"; nm.textContent = ex.toUpperCase(); row.appendChild(nm);
+    const grid = document.createElement("div"); grid.className = "sets-grid";
+    for (let s = 0; s < SETS; s++) {
+      const reps = session?.sets[ex]?.[s]?.reps ?? defaultReps(s);
+      const weight = session?.sets[ex]?.[s]?.weight ?? "";
+      const cell = document.createElement("div"); cell.className = "set-cell";
+      const sn = document.createElement("div"); sn.className = "set-num"; sn.textContent = "S"+(s+1); cell.appendChild(sn);
+      const stepper = document.createElement("div"); stepper.className = "reps-stepper";
+      const minus = document.createElement("button"); minus.className="step-btn"; minus.textContent="−"; minus.type="button";
+      const ri = document.createElement("input"); ri.className="reps-input"; ri.value=reps; ri.placeholder="−";
+      const plus = document.createElement("button"); plus.className="step-btn"; plus.textContent="+"; plus.type="button";
+      minus.addEventListener("click", () => { const v=parseInt(ri.value,10); if(!isNaN(v)){const n=Math.max(0,v-1);ri.value=n;updateSet(ex,s,"reps",String(n));} });
+      plus.addEventListener("click",  () => { const v=parseInt(ri.value,10); if(!isNaN(v)){const n=v+1;ri.value=n;updateSet(ex,s,"reps",String(n));} });
+      ri.addEventListener("change", () => updateSet(ex,s,"reps",ri.value));
+      stepper.appendChild(minus); stepper.appendChild(ri); stepper.appendChild(plus);
+      const rl = document.createElement("div"); rl.className="reps-label"; rl.textContent="rép.";
+      const wr = document.createElement("div"); wr.className="weight-row";
+      const wi = document.createElement("input"); wi.type="number"; wi.min="0"; wi.step="0.5"; wi.className="weight-input"; wi.value=weight; wi.placeholder="—";
+      wi.addEventListener("change", () => updateSet(ex,s,"weight",wi.value));
+      const wu = document.createElement("span"); wu.className="weight-unit"; wu.textContent="kg";
+      wr.appendChild(wi); wr.appendChild(wu);
+      cell.appendChild(stepper); cell.appendChild(rl); cell.appendChild(wr);
+      grid.appendChild(cell);
+    }
+    row.appendChild(grid); body.appendChild(row);
+  });
+}
+
+function updateSet(ex, s, field, value) {
+  const session = getSession(currentParticipant, currentSessionId);
+  if (!session?.sets[ex]?.[s]) return;
+  session.sets[ex][s][field] = value;
+}
+
+function createNewSession() {
+  const session = emptySession(); state[currentParticipant].push(session); currentSessionId = session.id;
+  save(); updateTabCounts(); renderSessionSelect(); renderTable();
+  showToast("Nouvelle session créée", "success");
+}
+
+function deleteCurrentSession() {
+  if (!currentSessionId) return;
+  const session = getSession(currentParticipant, currentSessionId);
+  if (!session || !confirm("Supprimer la session du "+dateLabel(session.date)+" ?")) return;
+  state[currentParticipant] = state[currentParticipant].filter(s => s.id !== currentSessionId);
+  save();
+  const rem = state[currentParticipant];
+  currentSessionId = rem.length ? rem[rem.length-1].id : null;
+  if (!currentSessionId) { createNewSession(); return; }
+  updateTabCounts(); renderSessionSelect(); renderTable();
+  showToast("Session supprimée", "success");
+}
+
+function saveCurrentSession() {
+  if (!getSession(currentParticipant, currentSessionId)) { showToast("Aucune session à sauvegarder","error"); return; }
+  save(); showToast("Session enregistrée ✓","success");
+}
+
+function copyLastSession() {
+  const last = getLastSession(currentParticipant, currentSessionId);
+  if (!last) { showToast("Pas de session précédente","error"); return; }
+  const current = getSession(currentParticipant, currentSessionId);
+  if (!current) return;
+  EXERCISES.forEach(ex => { last.sets[ex]?.forEach((d,i) => { current.sets[ex][i]={...d}; }); });
+  renderTable(); showToast("Données copiées","success");
+}
+
+let toastTimer = null;
+function showToast(msg, type="") {
+  const t = document.getElementById("toast"); t.textContent=msg; t.className="toast "+type;
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.className="toast hidden"; }, 3000);
+}
+
+function switchParticipant(name) {
+  currentParticipant = name;
+  document.body.setAttribute("data-participant", name);
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.participant===name));
+  const ss = state[currentParticipant];
+  currentSessionId = ss.length ? ss[ss.length-1].id : null;
+  if (!currentSessionId) { createNewSession(); return; }
+  renderSessionSelect(); renderTable();
+}
+
+function init() {
+  const [y,m,d] = todayISO().split("-");
+  document.getElementById("session-date").textContent = d+"."+m+"."+y;
+  document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => switchParticipant(tab.dataset.participant)));
+  document.getElementById("session-select").addEventListener("change", e => { currentSessionId=parseInt(e.target.value,10); renderTable(); });
+  document.getElementById("new-session-btn").addEventListener("click", createNewSession);
+  document.getElementById("delete-session-btn").addEventListener("click", deleteCurrentSession);
+  document.getElementById("save-btn").addEventListener("click", saveCurrentSession);
+  document.getElementById("copy-last-btn").addEventListener("click", copyLastSession);
+
+  document.getElementById("export-btn").addEventListener("click", () => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], {type:"application/json"}));
+    a.download = "grind_backup_"+todayISO()+".json";
+    a.click(); URL.revokeObjectURL(a.href);
+    showToast("Données exportées ✓", "success");
+  });
+
+  document.getElementById("import-input").addEventListener("change", e => {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        if (!PARTICIPANTS.every(p => Array.isArray(data[p]))) throw new Error();
+        state = data; save(); updateTabCounts(); switchParticipant(currentParticipant);
+        showToast("Données importées ✓", "success");
+      } catch { showToast("Fichier invalide", "error"); }
+      e.target.value = "";
+    };
+    reader.readAsText(file);
+  });
+
+  updateTabCounts(); switchParticipant(PARTICIPANTS[0]);
+}
+
+document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
